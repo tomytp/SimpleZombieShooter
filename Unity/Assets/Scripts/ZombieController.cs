@@ -8,11 +8,14 @@ public class ZombieController : MonoBehaviour
     [SerializeField] private GameObject player;
     [SerializeField] private float movementSpeed = 5;
 
+    private Animator _animator;
     private Rigidbody _rigidbody;
+    private static readonly int Attacking = Animator.StringToHash("Attacking");
 
     private void Awake()
     {
-        _rigidbody = GetComponent<Rigidbody>(); 
+        _animator = GetComponent<Animator>();
+        _rigidbody = GetComponent<Rigidbody>();
     }
     
     private void FixedUpdate()
@@ -21,13 +24,23 @@ public class ZombieController : MonoBehaviour
         var zombiePosition = transform.position;
         var distance = Vector3.Distance(playerPosition, zombiePosition);
         
+        var direction = playerPosition - zombiePosition;
+        var rotation = Quaternion.LookRotation(direction);
+        _rigidbody.MoveRotation(rotation);
+        
         if (distance > 2.5)
         {
-            var direction = playerPosition - zombiePosition;
             _rigidbody.MovePosition(_rigidbody.position + (direction.normalized * (movementSpeed * Time.deltaTime)));
-
-            var rotation = Quaternion.LookRotation(direction);
-            _rigidbody.MoveRotation(rotation);
+            _animator.SetBool(Attacking, false);
         }
+        else
+        {
+            _animator.SetBool(Attacking,true);
+        }
+    }
+
+    private void EnemyAttack()
+    {
+        player.GetComponent<PlayerController>().EndGame();
     }
 }

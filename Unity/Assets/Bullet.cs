@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
@@ -17,5 +14,14 @@ public class Bullet : MonoBehaviour
     private void FixedUpdate()
     {
         _rigidbody.MovePosition(_rigidbody.position + transform.forward * (movementSpeed * Time.deltaTime));
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Inimigo"))
+        {
+            Destroy(other.gameObject);
+        }
+        Destroy(gameObject);
     }
 }
