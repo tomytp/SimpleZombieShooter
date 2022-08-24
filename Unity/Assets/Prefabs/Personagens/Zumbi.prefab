@@ -620,7 +620,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 1
+  m_Radius: 0.85
   m_Height: 3
   m_Direction: 1
   m_Center: {x: 0, y: 1.5, z: 0}
@@ -636,7 +636,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 578f4649c91e4de4da9e01f06b4306e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
   movementSpeed: 5
 --- !u!54 &1915835290
 Rigidbody:
@@ -1365,7 +1364,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4729257623563424
 Transform:
   m_ObjectHideFlags: 0

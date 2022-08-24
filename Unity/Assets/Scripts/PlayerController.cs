@@ -3,11 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private float movementSpeed = 10;
-    [SerializeField] private LayerMask ground;
+    [SerializeField] private LayerMask aimMask;
     [SerializeField] private GameObject gameOverCanvas;
     
     private Animator _animator;
@@ -48,7 +49,7 @@ public class PlayerController : MonoBehaviour
         _animator.SetBool(Moving, _direction != Vector3.zero);
 
         var ray = _camera.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray, out var hit, 100, ground))
+        if (Physics.Raycast(ray, out var hit, 100, aimMask))
         {
             var playerPosition = transform.position;
             

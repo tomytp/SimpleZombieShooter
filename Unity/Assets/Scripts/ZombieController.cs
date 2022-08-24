@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class ZombieController : MonoBehaviour
 {
-    [SerializeField] private GameObject player;
+    private GameObject _player;
     [SerializeField] private float movementSpeed = 5;
 
     private Animator _animator;
@@ -14,13 +14,14 @@ public class ZombieController : MonoBehaviour
 
     private void Awake()
     {
+        _player = GameObject.FindWithTag("Player");
         _animator = GetComponent<Animator>();
         _rigidbody = GetComponent<Rigidbody>();
     }
     
     private void FixedUpdate()
     {
-        var playerPosition = player.transform.position;
+        var playerPosition = _player.transform.position;
         var zombiePosition = transform.position;
         var distance = Vector3.Distance(playerPosition, zombiePosition);
         
@@ -41,6 +42,6 @@ public class ZombieController : MonoBehaviour
 
     private void EnemyAttack()
     {
-        player.GetComponent<PlayerController>().EndGame();
+        _player.GetComponent<PlayerController>().EndGame();
     }
 }
